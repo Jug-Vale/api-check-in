@@ -25,4 +25,13 @@ public final class CheckinRequest implements Serializable {
 	public Credential toCredential() {
 		return Credential.of(this.name, this.email);
 	}
+	
+	public void setName(final String name) {
+		this.name = name;
+	}
+	
+	public void setEmail(final String email) {
+		this.email = email;
+	}
+	
 }
