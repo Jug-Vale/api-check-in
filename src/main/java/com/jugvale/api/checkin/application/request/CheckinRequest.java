@@ -23,7 +23,7 @@ public final class CheckinRequest implements Serializable {
 	public CheckinRequest() {}
 	
 	public Credential toCredential() {
-		return Credential.of(this.name, this.email);
+		return Credential.of(this.name.toUpperCase(), this.email);
 	}
 	
 	public void setName(final String name) {
