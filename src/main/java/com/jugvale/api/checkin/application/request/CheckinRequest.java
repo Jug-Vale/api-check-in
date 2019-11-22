@@ -34,4 +34,11 @@ public final class CheckinRequest implements Serializable {
 		this.email = email;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getName() {
+		return name;
+	}
 }

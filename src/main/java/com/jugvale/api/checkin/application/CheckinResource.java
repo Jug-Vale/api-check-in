@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,11 +39,15 @@ public final class CheckinResource {
 			return ResponseEntity.notFound().build();
 	}
 	
+	@CrossOrigin("*")
 	@PostMapping
 	public ResponseEntity<Credential> doCheckin(@RequestBody @Valid final CheckinRequest request, 
 			final UriComponentsBuilder builder) {
-		final Credential saved = credentialService.save(request.toCredential());
 		
+		if(credentialService.findByEmail(request.getEmail()).isPresent())
+			return ResponseEntity.badRequest().build();
+			
+		final Credential saved = credentialService.save(request.toCredential());
 		final URI uri = builder.path(CHECKIN_CREATED).buildAndExpand(saved.getId()).toUri();
         return ResponseEntity.created(uri).body(saved);
 	}

@@ -17,7 +17,7 @@ public final class Credential implements Serializable {
 	@Id
 	private String id = ULID.random();
 	private String name;
-	@Indexed
+	@Indexed(unique = true)
 	private String email;
 	
 	private Credential(final String name, final String email) {
